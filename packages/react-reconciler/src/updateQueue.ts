@@ -28,7 +28,7 @@ export const createUpdateQueue = <Action>() => {
 };
 
 export const enqueueUpdate = <Action>(
-	updateQueue: UpdateQueue<Action>,
+	updateQueue: UpdateQueue<Action> | any,
 	update: Update<Action>
 ) => {
 	updateQueue.shared.pending = update;

@@ -15,12 +15,12 @@ export default [
 		output: [
 			{
 				file: `${pkgDistPath}/index.js`,
-				name: 'index.js',
+				name: 'ReactDOM',
 				format: 'umd'
 			},
 			{
 				file: `${pkgDistPath}/client.js`,
-				name: 'client.js',
+				name: 'client',
 				format: 'umd'
 			}
 		],
@@ -48,22 +48,17 @@ export default [
 			})
 		]
 	},
-	// react-dom
+	// react-test-utils
 	{
-		input: `${pkgPath}/${module}`,
+		input: `${pkgPath}/test-utils.ts`,
 		output: [
 			{
-				file: `${pkgDistPath}/index.js`,
-				name: 'index.js',
-				format: 'umd'
-			},
-			{
-				file: `${pkgDistPath}/client.js`,
-				name: 'client.js',
+				file: `${pkgDistPath}/test-utils.js`,
+				name: 'testUtils',
 				format: 'umd'
 			}
 		],
-		external: [...Object.keys(peerDependencies)],
+		external: ['react-dom', 'react'],
 		plugins: [
 			...getBaseRollupPlugins(),
 			// webpack resolve alias
