@@ -18,7 +18,7 @@ export class FiberNode {
 
 	memoizedProps: Props | null;
 	memoizedState: any;
-	alternate: FiberNode | null;
+	alternate: FiberNode | null; //指向另一棵树，用于current树和WIP树切换，此FiberNode为current树，则此属性指向WIP树
 	flags: Flags;
 	subtreeFlags: Flags;
 	updateQueue: unknown;

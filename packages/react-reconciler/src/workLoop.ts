@@ -5,10 +5,10 @@ import { createWorkInProgress, FiberNode, FiberRootNode } from './fiber';
 import { MutationMask, NoFlags } from './fiberFlags';
 import { HostRoot } from './workTags';
 
-let workInProgress: FiberNode | null = null;
+let workInProgress: FiberNode | null = null; //指向当前正在工作的FiberNode
 
 function prepareFreshStack(root: FiberRootNode) {
-	workInProgress = createWorkInProgress(root.current, {});
+	workInProgress = createWorkInProgress(root.current, {}); //初始化给WIP赋值
 }
 
 export function scheduleUpdateOnFiber(fiber: FiberNode) {
@@ -32,7 +32,7 @@ function markUpdateFromFiberToRoot(fiber: FiberNode) {
 }
 
 function renderRoot(root: FiberRootNode) {
-	// 初始化
+	// 初始化,给wip赋值为根节点，赋值完开始递归，workloop
 	prepareFreshStack(root);
 	do {
 		try {
@@ -88,17 +88,17 @@ function commitRoot(root: FiberRootNode) {
 
 function workLoop() {
 	while (workInProgress !== null) {
-		performUnitOfWork(workInProgress);
+		performUnitOfWork(workInProgress); //wip还有，执行计算Fiber
 	}
 }
 
 function performUnitOfWork(fiber: FiberNode) {
 	const next = beginWork(fiber);
-	fiber.memoizedProps = fiber.pendingProps;
+	fiber.memoizedProps = fiber.pendingProps; //memoizedProps保存执行结束后fiber的props
 	if (next === null) {
-		completeUnitOfWork(fiber);
+		completeUnitOfWork(fiber); //没有next子节点了，递到了最下面，开始归,将wip指向兄弟节点
 	} else {
-		workInProgress = next;
+		workInProgress = next; //还存在子节点，则将wip指向下一个FiberNode
 	}
 }
 
@@ -108,10 +108,10 @@ function completeUnitOfWork(fiber: FiberNode) {
 		completeWork(node);
 		const sibling = node.sibling;
 		if (sibling !== null) {
-			workInProgress = sibling;
+			workInProgress = sibling; //开始归,将wip指向兄弟节点
 			return;
 		}
-		node = node.return;
+		node = node.return; //没有兄弟节点，则把node赋值其return的父级节点
 		workInProgress = node;
 	} while (node !== null);
 }

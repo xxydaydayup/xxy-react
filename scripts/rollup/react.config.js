@@ -1,7 +1,7 @@
 import { getPackageJSON, resolvePkgPath, getBaseRollupPlugins } from './utils';
 import generatePackageJson from 'rollup-plugin-generate-package-json';
 
-const { name, module } = getPackageJSON('react');
+const { name, module } = getPackageJSON('react'); // 获得react这个包名对应的package.json里面的内容，再解构
 // react包的路径
 const pkgPath = resolvePkgPath(name);
 // react产物路径
@@ -12,7 +12,7 @@ export default [
 	{
 		input: `${pkgPath}/${module}`,
 		output: {
-			file: `${pkgDistPath}/index.js`,
+			file: `${pkgDistPath}/index.js`, //从react-dom下的index.js入口
 			name: 'React',
 			format: 'umd'
 		},

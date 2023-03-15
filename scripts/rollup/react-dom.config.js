@@ -11,7 +11,7 @@ const pkgDistPath = resolvePkgPath(name, true);
 export default [
 	// react-dom
 	{
-		input: `${pkgPath}/${module}`,
+		input: `${pkgPath}/${module}`, //从react-dom下的index.js入口
 		output: [
 			{
 				file: `${pkgDistPath}/index.js`,

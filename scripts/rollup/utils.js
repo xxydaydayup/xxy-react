@@ -16,7 +16,7 @@ export function resolvePkgPath(pkgName, isDist) {
 }
 
 export function getPackageJSON(pkgName) {
-	// ...包路径
+	// ...包路径,这个方法作用：传个包名,得到包名对应的package。json文件内容
 	const path = `${resolvePkgPath(pkgName)}/package.json`;
 	const str = fs.readFileSync(path, { encoding: 'utf-8' });
 	return JSON.parse(str);
