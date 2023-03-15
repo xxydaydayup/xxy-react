@@ -13,9 +13,9 @@ function prepareFreshStack(root: FiberRootNode) {
 
 export function scheduleUpdateOnFiber(fiber: FiberNode) {
 	// TODO 调度功能
-	// fiberRootNode
+	// fiberRootNode,先要向上找到root，再进行render过程（目前还是render，还没有commit）
 	const root = markUpdateFromFiberToRoot(fiber);
-	renderRoot(root);
+	renderRoot(root); //开始进入reconciler架构的render阶段workLoop
 }
 
 function markUpdateFromFiberToRoot(fiber: FiberNode) {

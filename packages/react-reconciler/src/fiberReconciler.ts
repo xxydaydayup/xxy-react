@@ -10,6 +10,7 @@ import {
 import { scheduleUpdateOnFiber } from './workLoop';
 import { HostRoot } from './workTags';
 
+//ReactDOM.createRoot(rootElement).render(<App/>)中 createRoot方法调用时触发下面函数
 export function createContainer(container: Container) {
 	const hostRootFiber = new FiberNode(HostRoot, {}, null);
 	const root = new FiberRootNode(container, hostRootFiber);
@@ -17,6 +18,7 @@ export function createContainer(container: Container) {
 	return root;
 }
 
+//ReactDOM.createRoot(rootElement).render(<App/>)中 render方法调用时触发下面函数
 export function updateContainer(
 	element: ReactElementType | null,
 	root: FiberRootNode
@@ -27,6 +29,6 @@ export function updateContainer(
 		hostRootFiber.updateQueue as UpdateQueue<ReactElementType | null>,
 		update
 	);
-	scheduleUpdateOnFiber(hostRootFiber);
+	scheduleUpdateOnFiber(hostRootFiber); //在Fiber中调度，TODO
 	return element;
 }

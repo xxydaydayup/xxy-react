@@ -54,7 +54,7 @@ export class FiberNode {
 }
 
 export class FiberRootNode {
-	container: Container;
+	container: Container; //DOMElement或者其他环境的节点，取决于宿主环境？
 	current: FiberNode;
 	finishedWork: FiberNode | null;
 	constructor(container: Container, hostRootFiber: FiberNode) {
@@ -72,14 +72,14 @@ export const createWorkInProgress = (
 	let wip = current.alternate;
 
 	if (wip === null) {
-		// mount
+		// mount  若无wip，即初始挂载阶段
 		wip = new FiberNode(current.tag, pendingProps, current.key);
 		wip.stateNode = current.stateNode;
 
 		wip.alternate = current;
 		current.alternate = wip;
 	} else {
-		// update
+		// update 若有wip，即更新阶段
 		wip.pendingProps = pendingProps;
 		wip.flags = NoFlags;
 		wip.subtreeFlags = NoFlags;
