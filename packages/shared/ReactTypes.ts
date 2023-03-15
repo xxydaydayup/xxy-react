@@ -13,4 +13,4 @@ export interface ReactElementType {
 	__mark: string;
 }
 
-export type Action<State> = State | ((prevState: State) => State);
+export type Action<State> = State | ((prevState: State) => State); //this.setState触发更新的两种方式
