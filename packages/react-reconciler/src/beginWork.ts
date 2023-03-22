@@ -5,8 +5,8 @@ import { renderWithHooks } from './fiberHooks';
 import { processUpdateQueue, UpdateQueue } from './updateQueue';
 import {
 	FunctionComponent,
-	HostComponent,
 	HostRoot,
+	HostComponent,
 	HostText
 } from './workTags';
 

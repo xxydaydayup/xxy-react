@@ -1,0 +1,4 @@
+{
+	"editor.mouseWheelZoom": true, //按住Ctrl键并滑动滚轮对编辑器字体进行缩放
+	"editor.wordWrap": "on" //一行过长，视觉上自动折行，实际不影响行数
+}

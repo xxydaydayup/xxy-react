@@ -53,7 +53,7 @@ function ChildReconciler(shouldTrackEffects: boolean) {
 		}
 		// TODO 多节点的情况 ul> li*3
 
-		// HostText
+		// HostText 当是文本节点的时候,
 		if (typeof newChild === 'string' || typeof newChild === 'number') {
 			return placeSingleChild(
 				reconcileSingleTextNode(returnFiber, currentFiber, newChild)
