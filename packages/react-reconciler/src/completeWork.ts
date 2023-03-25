@@ -25,7 +25,6 @@ export const completeWork = (wip: FiberNode) => {
 				// update
 			} else {
 				// 1. 构建DOM
-				// const instance = createInstance(wip.type);
 				const instance = createInstance(wip.type);
 				// 2. 将DOM插入到DOM树中
 				appendAllChildren(instance, wip);
