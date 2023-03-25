@@ -8,7 +8,7 @@ import { HostRoot } from './workTags';
 let workInProgress: FiberNode | null = null; //指向当前正在工作的FiberNode
 
 function prepareFreshStack(root: FiberRootNode) {
-	workInProgress = createWorkInProgress(root.current, {}); //初始化给WIP赋值
+	workInProgress = createWorkInProgress(root.current, {}); //初始化给WIP赋值，WIP由hostRootFiber（Root.current）得来
 }
 
 export function scheduleUpdateOnFiber(fiber: FiberNode) {
@@ -20,7 +20,7 @@ export function scheduleUpdateOnFiber(fiber: FiberNode) {
 
 function markUpdateFromFiberToRoot(fiber: FiberNode) {
 	let node = fiber;
-	let parent = node.return;
+	let parent = node.return; //一般node通过return指向hostRootFiber，hostRootFiber通过stateNode指向FiberRootNode
 	while (parent !== null) {
 		node = parent;
 		parent = node.return;

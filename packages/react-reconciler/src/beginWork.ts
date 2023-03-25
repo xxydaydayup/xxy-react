@@ -12,7 +12,7 @@ import {
 
 // 递归中的递阶段
 export const beginWork = (wip: FiberNode) => {
-	// 比较，返回子fiberNode,三种情况HostRoot、HostComponent、HostText
+	// 比较，返回子fiberNode,三种情况HostRoot(根节点的Fiber类型)、HostComponent(普通DOM或自定义组件的Fiber类型)、HostText(文本节点的Fiber类型)
 	switch (wip.tag) {
 		case HostRoot:
 			return updateHostRoot(wip);
