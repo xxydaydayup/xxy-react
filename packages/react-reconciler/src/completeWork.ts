@@ -5,13 +5,17 @@ import {
 	createTextInstance
 } from 'hostConfig';
 import { FiberNode } from './fiber';
-import { NoFlags } from './fiberFlags';
+import { NoFlags, Update } from './fiberFlags';
 import {
 	HostRoot,
 	HostText,
 	HostComponent,
 	FunctionComponent
 } from './workTags';
+
+function markUpdate(fiber: FiberNode) {
+	fiber.flags |= Update; //标记更新
+}
 
 export const completeWork = (wip: FiberNode) => {
 	// 递归中的归
@@ -35,6 +39,11 @@ export const completeWork = (wip: FiberNode) => {
 		case HostText:
 			if (current !== null && wip.stateNode) {
 				// update
+				const oldText = current.memoizedProps.content;
+				const newText = newProps.content;
+				if (oldText !== newText) {
+					markUpdate(wip);
+				}
 			} else {
 				// 1. 构建DOM
 				const instance = createTextInstance(newProps.content);
