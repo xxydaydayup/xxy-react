@@ -11,8 +11,8 @@ import {
 } from './updateQueue';
 import { scheduleUpdateOnFiber } from './workLoop';
 
-let currentlyRenderingFiber: FiberNode | null = null;
-let workInProgressHook: Hook | null = null;
+let currentlyRenderingFiber: FiberNode | null = null; //当前正在render的Fiber
+let workInProgressHook: Hook | null = null; //当前正在处理的某一个hook（hooks链表上的）
 
 const { currentDispatcher } = internals;
 interface Hook {
@@ -46,7 +46,7 @@ export function renderWithHooks(wip: FiberNode) {
 }
 
 const HooksDispatcherOnMount: Dispatcher = {
-	useState: mountState
+	useState: mountState //useStae触发时调用的函数，返回[memoizedState, dispatch]
 };
 
 function mountState<State>(

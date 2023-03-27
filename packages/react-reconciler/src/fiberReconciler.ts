@@ -12,6 +12,7 @@ import { HostRoot } from './workTags';
 
 //ReactDOM.createRoot(rootElement).render(<App/>)中 createRoot方法调用时触发下面函数
 export function createContainer(container: Container) {
+	// eslint-disable-next-line no-debugger
 	const hostRootFiber = new FiberNode(HostRoot, {}, null);
 	const root = new FiberRootNode(container, hostRootFiber);
 	hostRootFiber.updateQueue = createUpdateQueue();
@@ -29,6 +30,8 @@ export function updateContainer(
 		hostRootFiber.updateQueue as UpdateQueue<ReactElementType | null>,
 		update
 	);
+	console.log(111);
+
 	scheduleUpdateOnFiber(hostRootFiber); //在Fiber中调度，TODO
 	return element;
 }

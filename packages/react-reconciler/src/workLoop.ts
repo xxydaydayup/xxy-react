@@ -78,11 +78,11 @@ function commitRoot(root: FiberRootNode) {
 		// mutation Placement
 		commitMutationEffects(finishedWork);
 
-		root.current = finishedWork;
+		root.current = finishedWork; //切换current树和wip树，发生在mutation和layout之间
 
 		// layout
 	} else {
-		root.current = finishedWork;
+		root.current = finishedWork; //切换current树和wip树，发生在mutation和layout之间
 	}
 }
 
