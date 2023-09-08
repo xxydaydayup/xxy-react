@@ -1,7 +1,7 @@
 import { Props, Key, Ref, ReactElementType } from 'shared/ReactTypes';
 import { FunctionComponent, HostComponent, WorkTag } from './workTags';
 import { Flags, NoFlags } from './fiberFlags';
-import { Container } from 'hostConfig';
+import { Container } from 'hostConfig'; // 因为在tsconfig.json中配置了paths，所以才能直接用hostConfig
 
 export class FiberNode {
 	type: any;
@@ -46,7 +46,7 @@ export class FiberNode {
 		this.pendingProps = pendingProps; // 接下来有哪些props需要改变；
 		this.memoizedProps = null; // 工作完后的props
 		this.memoizedState = null; // 工作完后的state
-		this.updateQueue = null;
+		this.updateQueue = null; // 更新队列
 
 		this.alternate = null;
 		// 将flags叫做副作用 (就像useEffect的副作用类似概念，是RE和FiberNode比较之后而改变flags)
@@ -57,7 +57,7 @@ export class FiberNode {
 }
 
 export class FiberRootNode {
-	container: Container; //DOMElement或者其他环境的节点，取决于宿主环境？
+	container: Container; //DOMElement 或者 其他环境的节点，这取决于宿主环境
 	current: FiberNode;
 	finishedWork: FiberNode | null;
 	constructor(container: Container, hostRootFiber: FiberNode) {

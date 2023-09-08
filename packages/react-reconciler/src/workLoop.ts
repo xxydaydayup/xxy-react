@@ -11,6 +11,7 @@ function prepareFreshStack(root: FiberRootNode) {
 	workInProgress = createWorkInProgress(root.current, {}); //初始化给WIP赋值，WIP由hostRootFiber（Root.current）得来
 }
 
+// 在Fiber中调度更新，之后会实现调度功能
 export function scheduleUpdateOnFiber(fiber: FiberNode) {
 	// TODO 调度功能
 	// fiberRootNode,先要向上找到root，再进行render过程（目前还是render，还没有commit）
@@ -19,8 +20,9 @@ export function scheduleUpdateOnFiber(fiber: FiberNode) {
 }
 
 function markUpdateFromFiberToRoot(fiber: FiberNode) {
+	//一般子Fiber通过return指向父Fiber直至hostRootFiber，hostRootFiber通过stateNode指向FiberRootNode(挂载根节点)
 	let node = fiber;
-	let parent = node.return; //一般node通过return指向hostRootFiber，hostRootFiber通过stateNode指向FiberRootNode
+	let parent = node.return;
 	while (parent !== null) {
 		node = parent;
 		parent = node.return;
@@ -49,6 +51,7 @@ function renderRoot(root: FiberRootNode) {
 	const finishedWork = root.current.alternate;
 	root.finishedWork = finishedWork;
 
+	// render阶段（递+归）结束，生成了wip树,开始commit阶段
 	// wip fiberNode树 树中的flags
 	commitRoot(root);
 }
@@ -64,7 +67,7 @@ function commitRoot(root: FiberRootNode) {
 		console.log('commit阶段开始', finishedWork);
 	}
 
-	//重置
+	// 重置
 	root.finishedWork = null;
 
 	//判断是否存在3个子阶段需要执行的操作

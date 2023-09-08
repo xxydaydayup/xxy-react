@@ -27,8 +27,9 @@ export const createUpdateQueue = <Action>() => {
 	} as UpdateQueue<Action>;
 };
 
+//往update队列添加update的方法
 export const enqueueUpdate = <Action>(
-	updateQueue: UpdateQueue<Action> | any, //往update队列添加update的方法
+	updateQueue: UpdateQueue<Action> | any,
 	update: Update<Action>
 ) => {
 	updateQueue.shared.pending = update;

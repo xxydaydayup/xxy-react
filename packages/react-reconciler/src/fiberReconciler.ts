@@ -30,7 +30,7 @@ export function updateContainer(
 		hostRootFiber.updateQueue as UpdateQueue<ReactElementType | null>,
 		update
 	);
-	console.log(111);
+	console.log(111, 'render方法调用之后就是这里了');
 
 	scheduleUpdateOnFiber(hostRootFiber); //在Fiber中调度，TODO
 	return element;
