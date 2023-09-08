@@ -19,11 +19,12 @@ export class FiberNode {
 	memoizedProps: Props | null;
 	memoizedState: any; //对于FC的FiberNode，此属性指向当前FC的hooks链表
 	alternate: FiberNode | null; //指向另一棵树，用于current树和WIP树切换，此FiberNode为current树，则此属性指向WIP树
-	flags: Flags;
+	flags: Flags; // reactElement和FiberNode比较之后，生成子FiberNode的增删改操作标识
 	subtreeFlags: Flags;
 	updateQueue: unknown;
 	deletions: FiberNode[] | null;
 
+	// tag: 标识FiberNode是什么类型的节点 ; pendingProps:接下来有哪些props需要改变；key:reactElement的key
 	constructor(tag: WorkTag, pendingProps: Props, key: Key) {
 		// 实例
 		this.tag = tag;
@@ -34,7 +35,7 @@ export class FiberNode {
 		this.type = null;
 
 		// 构成树状结构
-		this.return = null;
+		this.return = null; // 指向父
 		this.sibling = null;
 		this.child = null;
 		this.index = 0;
@@ -42,13 +43,13 @@ export class FiberNode {
 		this.ref = null;
 
 		// 作为工作单元
-		this.pendingProps = pendingProps;
-		this.memoizedProps = null;
-		this.memoizedState = null;
+		this.pendingProps = pendingProps; // 接下来有哪些props需要改变；
+		this.memoizedProps = null; // 工作完后的props
+		this.memoizedState = null; // 工作完后的state
 		this.updateQueue = null;
 
 		this.alternate = null;
-		// 副作用
+		// 将flags叫做副作用 (就像useEffect的副作用类似概念，是RE和FiberNode比较之后而改变flags)
 		this.flags = NoFlags;
 		this.subtreeFlags = NoFlags;
 		this.deletions = null;

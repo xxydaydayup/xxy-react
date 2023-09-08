@@ -88,6 +88,7 @@ function commitRoot(root: FiberRootNode) {
 
 function workLoop() {
 	while (workInProgress !== null) {
+		// 只要wip不为null，就执行工作单元
 		performUnitOfWork(workInProgress); //wip还有，执行计算Fiber
 	}
 }
