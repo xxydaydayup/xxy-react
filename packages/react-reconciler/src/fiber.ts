@@ -20,7 +20,7 @@ export class FiberNode {
 	memoizedState: any; //对于FC的FiberNode，此属性指向当前FC的hooks链表
 	alternate: FiberNode | null; //指向另一棵树，用于current树和WIP树切换，此FiberNode为current树，则此属性指向WIP树
 	flags: Flags; // reactElement和FiberNode比较之后，生成子FiberNode的增删改操作标识
-	subtreeFlags: Flags;
+	subtreeFlags: Flags; // 子树中的flags,在completeWork阶段，将子树的flag冒泡上去，性能优化
 	updateQueue: unknown;
 	deletions: FiberNode[] | null;
 
@@ -29,7 +29,7 @@ export class FiberNode {
 		// 实例
 		this.tag = tag;
 		this.key = key;
-		// HostComponent <div> div DOM
+		// HostComponent对应的DOM元素 <div> div DOM
 		this.stateNode = null;
 		// FunctionComponent () => {}
 		this.type = null;

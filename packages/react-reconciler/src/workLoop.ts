@@ -70,20 +70,21 @@ function commitRoot(root: FiberRootNode) {
 	// 重置
 	root.finishedWork = null;
 
-	//判断是否存在3个子阶段需要执行的操作
-	//root flags root subtreeFlags
+	// 判断是否存在3个子阶段需要执行的操作
+	// root flags root subtreeFlags
 	const subtreeHasEffect =
 		(finishedWork.subtreeFlags & MutationMask) !== NoFlags;
 	const rootHasEffect = (finishedWork.flags & MutationMask) !== NoFlags;
 
 	if (subtreeHasEffect || rootHasEffect) {
-		// beforeMutation
-		// mutation Placement
+		// 阶段 1.beforeMutation
+
+		// 阶段2.mutation Placement
 		commitMutationEffects(finishedWork);
 
 		root.current = finishedWork; //切换current树和wip树，发生在mutation和layout之间
 
-		// layout
+		// 阶段3.layout
 	} else {
 		root.current = finishedWork; //切换current树和wip树，发生在mutation和layout之间
 	}

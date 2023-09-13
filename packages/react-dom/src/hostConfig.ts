@@ -19,6 +19,7 @@ export const appendInitialChild = (
 	parent.appendChild(child);
 };
 
+// 文本节点
 export const createTextInstance = (content: string) => {
 	return document.createTextNode(content);
 };
