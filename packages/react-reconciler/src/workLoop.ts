@@ -48,6 +48,7 @@ function renderRoot(root: FiberRootNode) {
 		}
 	} while (true);
 
+	// render阶段生成的 wip树 赋值给root.finishedWork
 	const finishedWork = root.current.alternate;
 	root.finishedWork = finishedWork;
 
@@ -56,6 +57,7 @@ function renderRoot(root: FiberRootNode) {
 	commitRoot(root);
 }
 
+// commit阶段要做的事：1.切换current树和wip树 2.执行placement对应的flag操作
 function commitRoot(root: FiberRootNode) {
 	const finishedWork = root.finishedWork; //commit阶段
 
@@ -71,7 +73,7 @@ function commitRoot(root: FiberRootNode) {
 	root.finishedWork = null;
 
 	// 判断是否存在3个子阶段需要执行的操作
-	// root flags root subtreeFlags
+	// 根节点或者其子节点是否有更新flag，有flag
 	const subtreeHasEffect =
 		(finishedWork.subtreeFlags & MutationMask) !== NoFlags;
 	const rootHasEffect = (finishedWork.flags & MutationMask) !== NoFlags;

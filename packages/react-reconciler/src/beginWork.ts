@@ -39,7 +39,7 @@ export const beginWork = (wip: FiberNode) => {
 function updateFunctionComponent(wip: FiberNode) {
 	const nextChildren = renderWithHooks(wip);
 	reconcileChildren(wip, nextChildren);
-	return wip.child; //都会返回一个wip Fiber
+	return wip.child; //都会返回一个wip Fiber树
 }
 
 function updateHostRoot(wip: FiberNode) {

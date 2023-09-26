@@ -19,6 +19,7 @@
 		"skipLibCheck": true,
 		"baseUrl": "./packages",
 		"paths": {
+			// 这是应付类型检查的，在打包时也要设置hostConfig的路径，才能打包成功
 			"hostConfig": ["./react-dom/src/hostConfig.ts"]
 		}
 	}
