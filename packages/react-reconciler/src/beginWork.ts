@@ -14,6 +14,7 @@ import {
 // 作用：根据Fiber节点类型进入不同的逻辑
 export const beginWork = (wip: FiberNode) => {
 	// 比较，返回子fiberNode,三种情况HostRoot(根节点的Fiber类型)、HostComponent(普通DOM或自定义组件的Fiber类型)、HostText(文本节点的Fiber类型)
+
 	switch (wip.tag) {
 		case HostRoot:
 			// 1.计算状态的最新值
